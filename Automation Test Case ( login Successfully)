@@ -1,0 +1,41 @@
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class GoogleLogin {
+
+    public static void main(String[] args) Throws InterruptedException {
+
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+       
+
+        try {
+            driver.get("http://accounts.google.com/");
+
+            // Enter Email
+            WebElement emailField = driver.findElement(By.id("identifierId"));
+            emailField.sendKeys("your-email@gmail.com");
+            driver.findElement(By.id("identifierNext")).click();
+            Thread.sleep(2000); // Wait for password field to load
+
+            // Enter Password
+            WebElement passwordField = driver.findElement(By.name("password"));
+            passwordField.sendKeys("your-password");
+            driver.findElement(By.id("passwordNext")).click();
+            Thread.sleep(3000);
+
+            System.out.println("Login successful!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
+        }
+    }
+}
